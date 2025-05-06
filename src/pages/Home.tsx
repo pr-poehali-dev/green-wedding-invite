@@ -1,4 +1,4 @@
-
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
@@ -93,13 +93,14 @@ const WeddingCountdown = ({ targetDate }: { targetDate: string }) => {
     return timeLeft;
   };
 
-  const [timeLeft, setTimeLeft] = React.useState(calculateTimeLeft());
+  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
 
-  React.useEffect(() => {
+  useEffect(() => {
     const timer = setTimeout(() => {
       setTimeLeft(calculateTimeLeft());
     }, 1000);
 
+    // Очистка таймера при размонтировании компонента
     return () => clearTimeout(timer);
   });
 
